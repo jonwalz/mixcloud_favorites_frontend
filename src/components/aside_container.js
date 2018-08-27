@@ -9,10 +9,10 @@ const AsideContainer = styled("aside")`
   width: 33%;
 `;
 
-const Aside = () => {
+const Aside = ({ setDj }) => {
     return (
         <AsideContainer>
-            <FavoritesList />
+            <FavoritesList setDj={setDj} />
         </AsideContainer>
     );
 };
