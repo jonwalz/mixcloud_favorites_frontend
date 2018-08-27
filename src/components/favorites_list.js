@@ -4,27 +4,35 @@ import Divider from "./divider";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
+const GET_DJS = gql`
+  {
+    djs {
+      username
+    }
+  }
+`;
+
 const List = styled("ul")`
   width: 100%;
   list-style-type: none;
   margin: 0;
   padding: 0px 10px;
-  border: 1px solid black;
 
   .list-title {
-    color: #64FFF6;
+    color: #1A3937;
     margin-bottom: 0;
+    min-height: 35px;
   }
 `;
 
-const ListItem = styled("li")`
-  color: #64FFF6;
+export const ListItem = styled("li")`
+  color: #000000;
   font-size: 12px;
   font-weight: 200;
   display: block;
   padding: 8px 0 8px 30px;
-  background-color: #992F4E;
-  border: 2px solid #64FFF6;
+  background-color: rgba(255,255,255,0.3);
+  border: 2px solid #76678A;
   margin-bottom: 15px;
   margin-top: 15px;
   cursor: pointer;
@@ -40,14 +48,6 @@ const DjList = ({ djs, setDj }) => {
     ));
 };
 
-const GET_DJS = gql`
-  {
-    djs {
-      username
-    }
-  }
-`;
-
 const FavoritesList = ({ setDj }) => (
     <Query query={GET_DJS}>
         {({ loading, error, data: { djs } }) => {
@@ -56,7 +56,9 @@ const FavoritesList = ({ setDj }) => (
 
             return (
                 <List>
-                    <h2 className="list-title">Title</h2>
+                    <h2 className="list-title">
+                        Favorites
+                    </h2>
                     <Divider />
                     <DjList
                         djs={djs}
