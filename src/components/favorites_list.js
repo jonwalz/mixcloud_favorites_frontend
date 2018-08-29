@@ -8,6 +8,7 @@ const GET_DJS = gql`
   {
     djs {
       username
+      display_name
     }
   }
 `;
@@ -39,11 +40,11 @@ export const ListItem = styled("li")`
 `;
 
 const DjList = ({ djs, setDj }) => {
-    return djs.map(({ username }) => (
+    return djs.map(({ display_name, username }) => (
         <ListItem
             onClick={setDj.bind(setDj, username)}
         >
-            {username}
+            {display_name}
         </ListItem>
     ));
 };
