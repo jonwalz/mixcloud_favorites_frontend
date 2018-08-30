@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import Aside from "./components/aside_container";
 import Contents from "./components/contents_container";
 import styled from "react-emotion";
@@ -12,9 +12,15 @@ const Container = styled("div")`
   width: 100%;
  `;
 
-class App extends React.Component {
-    constructor() {
-        super()
+interface AppProps {}
+
+interface AppState {
+    readonly selectedDj: string
+}
+
+class App extends React.Component<AppProps, AppState> {
+    constructor(props: AppProps) {
+        super(props)
         this.state = {
             selectedDj: '',
         }
