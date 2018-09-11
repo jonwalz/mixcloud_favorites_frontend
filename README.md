@@ -6,3 +6,11 @@ I'm creating this app to have an easy way to list shows of my favorite djs on mi
 Also a way to learn graphql
 
 Server repo can be found [here](https://github.com/jonwalz/mixcloud_graphql)
+
+---
+
+Install dependencies:
+`yarn`
+
+Start dev server
+`yarn start`
