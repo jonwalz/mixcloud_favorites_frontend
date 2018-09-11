@@ -1,7 +1,6 @@
-import React from "react";
+import * as React from "react";
 import styled from "react-emotion";
 import { ListItem } from './favorites_list'
-import Divider from "./divider";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
@@ -20,12 +19,12 @@ const FeedContainer = styled('ul')`
 
 const FeedList = ({ username }) => (
     <Query query={GET_FEED} variables={{ username }}>
-        {({ loading, err, data }) => {
+        {({ loading, error, data }) => {
             if (loading) return "Loading...";
-            if (err) return `Error!: ${err}`;
+            if (error) return `Error!: ${error}`;
 
-            return data.feed.map(({ url }) => {
-                return (<ListItem>{url}</ListItem>)
+            return data.feed.map(({ url }, i) => {
+                return (<ListItem key={`${url}${i}`}>{url}</ListItem>)
             })
         }}
     </Query>
