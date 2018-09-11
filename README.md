@@ -10,7 +10,9 @@ Server repo can be found [here](https://github.com/jonwalz/mixcloud_graphql)
 ---
 
 Install dependencies:
-`yarn`
+
+```yarn```
 
 Start dev server
-`yarn start`
+
+```yarn start```
