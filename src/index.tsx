@@ -10,9 +10,9 @@ import "./styles.css";
 const Container = styled("div")`
   display: flex;
   width: 100%;
- `;
+`;
 
-interface AppProps {}
+interface AppProps { }
 
 interface AppState {
     readonly selectedDj: string
