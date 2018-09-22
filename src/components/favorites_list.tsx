@@ -42,7 +42,7 @@ export const ListItem = styled("li")`
 const DjList = ({ djs, setDj }) => {
     return djs.map(({ display_name, username }) => (
         <ListItem
-            onClick={setDj.bind(setDj, username)}
+            onClick={setDj.bind(setDj, display_name)}
         >
             {display_name}
         </ListItem>
