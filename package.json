@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "@material-ui/core": "^3.8.1",
+    "@material-ui/icons": "^3.0.2",
+    "jss": "^10.0.0-alpha.3",
+    "@types/jss": "^9.5.7",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
     "react-scripts-ts": "2.17.0",
     "tslint": "^5.11.0"
   },
@@ -21,10 +25,10 @@
     "@types/react": "^16.4.13",
     "@types/react-dom": "^16.0.7",
     "apollo-boost": "^0.1.15",
-    "emotion": "^9.2.8",
+    "emotion": "^9.2.12",
     "graphql": "^0.13.2",
-    "react-apollo": "^2.1.11",
-    "react-emotion": "^9.2.8",
+    "react-apollo": "^2.2.4",
+    "react-emotion": "^9.2.12",
     "typescript": "^3.0.3"
   }
 }

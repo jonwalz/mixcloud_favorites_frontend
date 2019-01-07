@@ -1,13 +1,15 @@
 import * as React from "react";
 import styled from "react-emotion";
 import { ListItem } from './favorites_list'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
 const GET_FEED = gql`
     query Feed($username: String!){
-        feed(username: $username) {
-            url
+        cloudCasts(username: $username) {
+            embedUrl
+            title
         }
     }
 `;
@@ -20,11 +22,16 @@ const FeedContainer = styled('ul')`
 const FeedList = ({ username }) => (
     <Query query={GET_FEED} variables={{ username }}>
         {({ loading, error, data }) => {
-            if (loading) return "Loading...";
+            if (loading) return <CircularProgress />;
             if (error) return `Error!: ${error}`;
 
-            return data.feed.map(({ url }, i) => {
-                return (<ListItem key={`${url}${i}`}>{url}</ListItem>)
+            return data.cloudCasts.map(({ embedUrl, title }, i) => {
+                return (
+                    <ListItem key={`${title}${i}`}>
+                        <h2>{title}</h2>
+                        <span>{createEmbed(embedUrl)}</span>
+                    </ListItem>
+                )
             })
         }}
     </Query>
@@ -39,3 +46,9 @@ const Feed = ({ username }) => {
 }
 
 export default Feed;
+
+const createEmbed = (embedUrl) => <StyledEmbed dangerouslySetInnerHTML={{ __html: embedUrl }}></StyledEmbed>
+
+const StyledEmbed = styled("div")`
+    margin-bottom: 5px;
+`
