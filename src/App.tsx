@@ -2,7 +2,7 @@ import * as React from "react"
 import Aside from "./components/aside_container"
 import Contents from "./components/contents_container"
 import SideDrawer from "./components/side_drawer"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { ApolloProvider } from "react-apollo"
 import client from "./client/client"
 import NavBar from "./components/navbar"
@@ -13,8 +13,14 @@ const Container = styled("div")`
   width: 100%;
 `
 
-class App extends React.Component {
-    constructor(props) {
+interface AppState {
+    readonly selectedDj: string,
+    readonly selectedDisplayName: string,
+    readonly isDrawerOpen: boolean
+}
+
+class App extends React.Component<{}, AppState> {
+    constructor(props: {}) {
         super(props)
         this.state = {
             selectedDj: "",
@@ -26,15 +32,16 @@ class App extends React.Component {
         this.toggleDrawer = this.toggleDrawer.bind(this)
     }
 
-    setDj(selectedDj, selectedDisplayName) {
-        this.setState({
+    setDj(selectedDj: string) {
+        this.setState((prevState) => ({
+            ...prevState,
             selectedDj,
-            selectedDisplayName,
-        })
+            selectedDisplayName: prevState.selectedDisplayName,
+        }))
     }
 
     toggleDrawer() {
-        this.setState((prevState) => ({
+        this.setState((prevState: AppState) => ({
             isDrawerOpen: !prevState.isDrawerOpen,
         }))
     }

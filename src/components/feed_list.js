@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "react-emotion";
+import styled from "@emotion/styled";
 import { ListItem } from './favorites_list'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import gql from "graphql-tag";

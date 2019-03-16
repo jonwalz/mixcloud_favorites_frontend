@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 import FavoritesList from './favorites_list'
 
 const AsideContainer = styled('aside')`
@@ -8,7 +8,11 @@ const AsideContainer = styled('aside')`
   height: 100vh;
 `
 
-const Aside = ({ setDj }) => {
+interface AsideProps {
+    readonly setDj: (selectedDj: string) => void
+}
+
+const Aside = ({ setDj }: AsideProps) => {
 	return (
 		<AsideContainer>
 			<FavoritesList setDj={setDj} />

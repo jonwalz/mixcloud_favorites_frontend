@@ -3,6 +3,7 @@ import gql from "graphql-tag"
 import { Mutation } from "react-apollo"
 import Input from "@material-ui/core/Input"
 import { GET_DJS } from "./favorites_list"
+
 const SAVE_DJ = gql`
     mutation CreateDj(
         $username: String!
@@ -23,7 +24,12 @@ const SAVE_DJ = gql`
     }
 `
 
-const AddArtistField = (props) => {
+interface AddArtistFieldProps {
+    readonly className: string,
+    readonly toggleShowMakeArtist: () => void
+}
+
+const AddArtistField = (props: AddArtistFieldProps) => {
     return (
         <Mutation
             mutation={SAVE_DJ}

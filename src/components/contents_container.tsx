@@ -1,9 +1,9 @@
 import * as React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import Divider from "@material-ui/core/Divider"
 import Feed from "./feed_list"
 import classNames from "classnames"
-import { withStyles } from "@material-ui/core/styles"
+import { withStyles, Theme } from "@material-ui/core/styles"
 
 const ContentsContainer = styled("section")`
   height: 100vh;
@@ -17,8 +17,19 @@ const ContentsContainer = styled("section")`
     min-height: 35px;
   }
 `
+interface StyleClasses {
+    content: string,
+    contentShift: string
+}
 
-const Contents = ({ selectedDj, selectedDisplayName, isOpen, classes }) => {
+interface ContentsProps {
+    readonly selectedDj: string,
+    readonly selectedDisplayName: string,
+    readonly isOpen: boolean,
+    readonly classes: StyleClasses
+}
+
+const Contents = ({ selectedDj, selectedDisplayName, isOpen, classes }: ContentsProps) => {
     return (
         <ContentsContainer
             className={classNames(classes.content, {
@@ -34,10 +45,9 @@ const Contents = ({ selectedDj, selectedDisplayName, isOpen, classes }) => {
 
 const drawerWidth = 240
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
     content: {
         flexGrow: 1,
-        padding: theme.spacing.unit * 3,
         transition: theme.transitions.create("margin", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,

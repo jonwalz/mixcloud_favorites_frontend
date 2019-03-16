@@ -1,5 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import Divider from "@material-ui/core/Divider"
 import AddArtistField from "./add_artist"
 import AddCircle from "@material-ui/icons/AddCircle"
@@ -44,7 +44,7 @@ const List = styled("ul")`
 
     .artist-field {
         grid-row-start: 2;
-        grid-colum-start: 1;
+        grid-column-start: 1;
     }
 
     form {
@@ -70,7 +70,17 @@ export const ListItem = styled("li")`
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 `
 
-const DjList = ({ djs, setDj }) => {
+interface dj {
+    readonly display_name: string,
+    readonly username: string
+}
+
+interface DjListProps {
+    readonly djs: ReadonlyArray<dj>,
+    readonly setDj: (displayName: string) => void
+}
+
+const DjList = ({ djs, setDj }: DjListProps) => {
     return djs.map(({ display_name, username }) => (
         <ListItem onClick={setDj.bind(setDj, username, display_name)}>
             {display_name}
@@ -78,8 +88,16 @@ const DjList = ({ djs, setDj }) => {
     ))
 }
 
-class FavoritesList extends React.Component {
-    constructor(props) {
+interface FavoritesListProps {
+    readonly setDj: (selectedDj: string) => void
+}
+
+interface FavoritesListState {
+    readonly isMakeArtist: boolean
+}
+
+class FavoritesList extends React.Component<FavoritesListProps, FavoritesListState> {
+    constructor(props: FavoritesListProps) {
         super(props)
 
         this.state = {
@@ -89,7 +107,7 @@ class FavoritesList extends React.Component {
         this.toggleShowMakeArtist = this.toggleShowMakeArtist.bind(this)
     }
 
-    toggleShowMakeArtist() {
+    toggleShowMakeArtist(): void {
         this.setState((prevState) => ({
             isMakeArtist: !prevState.isMakeArtist,
         }))
@@ -122,7 +140,7 @@ class FavoritesList extends React.Component {
                                 )}
                             </div>
                             <Divider />
-                            <DjList djs={djs} setDj={setDj} />
+                            {DjList({djs, setDj})}
                         </List>
                     )
                 }}
