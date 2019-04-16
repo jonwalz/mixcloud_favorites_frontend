@@ -1,23 +1,23 @@
-import * as React from "react"
-import styled from "@emotion/styled"
-import Divider from "@material-ui/core/Divider"
-import AddArtistField from "./add_artist"
-import AddCircle from "@material-ui/icons/AddCircle"
-import CircularProgress from "@material-ui/core/CircularProgress"
-import gql from "graphql-tag"
-import { Query } from "react-apollo"
+import * as React from 'react'
+import * as Apollo from 'react-apollo'
+import styled from '@emotion/styled'
+import Divider from '@material-ui/core/Divider'
+import AddArtistField from './add_artist'
+import AddCircle from '@material-ui/icons/AddCircle'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 
 export const GET_DJS = gql`
     query {
-        dJs {
-            id
+        djs {
             username
             display_name
         }
     }
 `
 
-const List = styled("ul")`
+const List = styled('ul')`
   width: 100%;
   list-style-type: none;
   margin: 0;
@@ -55,7 +55,7 @@ const List = styled("ul")`
   }
 `
 
-export const ListItem = styled("li")`
+export const ListItem = styled('li')`
   color: #000000;
   font-size: 14px;
   font-weight: 200;
@@ -71,12 +71,12 @@ export const ListItem = styled("li")`
 `
 
 interface dj {
-    readonly display_name: string,
+    readonly display_name: string
     readonly username: string
 }
 
 interface DjListProps {
-    readonly djs: ReadonlyArray<dj>,
+    readonly djs: ReadonlyArray<dj>
     readonly setDj: (displayName: string) => void
 }
 
@@ -96,7 +96,10 @@ interface FavoritesListState {
     readonly isMakeArtist: boolean
 }
 
-class FavoritesList extends React.Component<FavoritesListProps, FavoritesListState> {
+class FavoritesList extends React.Component<
+    FavoritesListProps,
+    FavoritesListState
+> {
     constructor(props: FavoritesListProps) {
         super(props)
 
@@ -118,7 +121,7 @@ class FavoritesList extends React.Component<FavoritesListProps, FavoritesListSta
         const { isMakeArtist } = this.state
         return (
             <Query query={GET_DJS}>
-                {({ loading, error, data }) => {
+                {({ loading, error, data }: Apollo.QueryResult<any>) => {
                     if (loading) return <CircularProgress />
                     if (error) return `Error! ${error.message}`
                     const { djs } = data
@@ -140,7 +143,7 @@ class FavoritesList extends React.Component<FavoritesListProps, FavoritesListSta
                                 )}
                             </div>
                             <Divider />
-                            {DjList({djs, setDj})}
+                            {DjList({ djs, setDj })}
                         </List>
                     )
                 }}

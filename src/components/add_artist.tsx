@@ -1,4 +1,5 @@
 import * as React from "react"
+import * as Apollo from "react-apollo"
 import gql from "graphql-tag"
 import { Mutation } from "react-apollo"
 import Input from "@material-ui/core/Input"
@@ -37,7 +38,7 @@ const AddArtistField = (props: AddArtistFieldProps) => {
                 query: GET_DJS
             }]}
         >
-            {(createDj, { data }) => {
+            {(createDj: any, { data }: Apollo.MutationResult<any>) => {
                 return (
                     <form
                         onSubmit={(e) => {
