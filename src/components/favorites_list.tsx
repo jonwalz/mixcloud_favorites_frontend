@@ -18,7 +18,6 @@ export const GET_DJS = gql`
 `
 
 const List = styled('ul')`
-  width: 100%;
   list-style-type: none;
   margin: 0;
   padding: 0px 10px;
@@ -81,8 +80,8 @@ interface DjListProps {
 }
 
 const DjList = ({ djs, setDj }: DjListProps) => {
-    return djs.map(({ display_name, username }) => (
-        <ListItem onClick={setDj.bind(setDj, username, display_name)}>
+    return djs.map(({ display_name, username }, i) => (
+        <ListItem key={i} onClick={setDj.bind(setDj, username, display_name)}>
             {display_name}
         </ListItem>
     ))
@@ -120,36 +119,42 @@ class FavoritesList extends React.Component<
         const { setDj } = this.props
         const { isMakeArtist } = this.state
         return (
-            <Query query={GET_DJS}>
-                {({ loading, error, data }: Apollo.QueryResult<any>) => {
-                    if (loading) return <CircularProgress />
-                    if (error) return `Error! ${error.message}`
-                    const { djs } = data
-                    return (
-                        <List>
-                            <div className="list-title">
-                                <h2>Djs</h2>
-                                <AddCircle
-                                    onClick={this.toggleShowMakeArtist}
-                                    className="circle-icon"
-                                />
-                                {isMakeArtist && (
-                                    <AddArtistField
-                                        className="artist-field"
-                                        toggleShowMakeArtist={
-                                            this.toggleShowMakeArtist
-                                        }
+            <FavoritesListContainer>
+                <Query query={GET_DJS}>
+                    {({ loading, error, data }: Apollo.QueryResult<any>) => {
+                        if (loading) return <CircularProgress />
+                        if (error) return `Error! ${error.message}`
+                        const { djs } = data
+                        return (
+                            <List>
+                                <div className="list-title">
+                                    <h2>Djs</h2>
+                                    <AddCircle
+                                        onClick={this.toggleShowMakeArtist}
+                                        className="circle-icon"
                                     />
-                                )}
-                            </div>
-                            <Divider />
-                            {DjList({ djs, setDj })}
-                        </List>
-                    )
-                }}
-            </Query>
+                                    {isMakeArtist && (
+                                        <AddArtistField
+                                            className="artist-field"
+                                            toggleShowMakeArtist={
+                                                this.toggleShowMakeArtist
+                                            }
+                                        />
+                                    )}
+                                </div>
+                                <Divider />
+                                {DjList({ djs, setDj })}
+                            </List>
+                        )
+                    }}
+                </Query>
+            </FavoritesListContainer>
         )
     }
 }
 
 export default FavoritesList
+
+const FavoritesListContainer = styled('div')`
+    width: 100%;
+`

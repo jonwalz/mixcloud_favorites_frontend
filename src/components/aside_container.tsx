@@ -1,10 +1,13 @@
 import * as React from 'react'
+// const { useState } = React
 import styled from '@emotion/styled'
 import FavoritesList from './favorites_list'
+import ServiceSelect from './service_select'
+
 
 const AsideContainer = styled('aside')`
   display: flex;
-  margin-top: 100px;
+  flex-direction: column;
   height: 100vh;
 `
 
@@ -13,11 +16,13 @@ interface AsideProps {
 }
 
 const Aside = ({ setDj }: AsideProps) => {
-	return (
-		<AsideContainer>
-			<FavoritesList setDj={setDj} />
-		</AsideContainer>
-	)
+    // const [ setSelectValue ] = useState('')
+    return (
+        <AsideContainer>
+            <ServiceSelect/>
+            <FavoritesList setDj={setDj} />
+        </AsideContainer>
+    )
 }
 
 export default Aside

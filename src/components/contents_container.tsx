@@ -1,6 +1,5 @@
 import * as React from "react"
 import styled from "@emotion/styled"
-import Divider from "@material-ui/core/Divider"
 import Feed from "./feed_list"
 import classNames from "classnames"
 import { withStyles, Theme } from "@material-ui/core/styles"
@@ -37,7 +36,6 @@ const Contents = ({ selectedDj, selectedDisplayName, isOpen, classes }: Contents
             })}
         >
             <h2>{selectedDisplayName}</h2>
-            <Divider />
             {selectedDj && <Feed username={selectedDj} />}
         </ContentsContainer>
     )

@@ -5,8 +5,8 @@
   "dependencies": {
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
-    "@material-ui/core": "^4.0.0-alpha.3",
-    "@material-ui/icons": "^4.0.0-alpha.1",
+    "@material-ui/core": "3.9.3",
+    "@material-ui/icons": "3.0.2",
     "@types/classnames": "^2.2.7",
     "@types/jss": "^9.5.7",
     "classes": "^0.3.0",
