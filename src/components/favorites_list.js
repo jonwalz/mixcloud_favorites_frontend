@@ -9,8 +9,7 @@ import { Query } from "react-apollo"
 
 export const GET_DJS = gql`
     query {
-        dJs {
-            id
+        djs {
             username
             display_name
         }

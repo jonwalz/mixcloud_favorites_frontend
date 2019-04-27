@@ -7,7 +7,7 @@ import { Query } from "react-apollo";
 
 const GET_FEED = gql`
     query Feed($username: String!){
-        cloudCasts(username: $username) {
+        feed(username: $username) {
             embedUrl
             title
         }
@@ -25,7 +25,7 @@ const FeedList = ({ username }) => (
             if (loading) return <CircularProgress />;
             if (error) return `Error!: ${error}`;
 
-            return data.cloudCasts.map(({ embedUrl, title }, i) => {
+            return data.feed.map(({ embedUrl, title }, i) => {
                 return (
                     <ListItem key={`${title}${i}`}>
                         <h2>{title}</h2>
