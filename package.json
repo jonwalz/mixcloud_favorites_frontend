@@ -9,6 +9,7 @@
     "@material-ui/icons": "3.0.2",
     "@types/classnames": "^2.2.7",
     "@types/jss": "^9.5.7",
+    "apollo-link-state": "^0.4.2",
     "classes": "^0.3.0",
     "classnames": "^2.2.6",
     "emotion": "^10.0.9",
@@ -24,7 +25,6 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "postinstall": "mkdir -p node_modules/@material-ui/core/node_modules/@types/jss && cp -r node_modules/@types/jss node_modules/@material-ui/core/node_modules/@types"
-
   },
   "devDependencies": {
     "@types/graphql": "^0.13.4",

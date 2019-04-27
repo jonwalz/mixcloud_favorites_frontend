@@ -1,5 +1,4 @@
 import * as React from 'react'
-// const { useState } = React
 import styled from '@emotion/styled'
 import FavoritesList from './favorites_list'
 import ServiceSelect from './service_select'
@@ -16,7 +15,6 @@ interface AsideProps {
 }
 
 const Aside = ({ setDj }: AsideProps) => {
-    // const [ setSelectValue ] = useState('')
     return (
         <AsideContainer>
             <ServiceSelect/>

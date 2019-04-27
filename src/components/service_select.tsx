@@ -1,4 +1,5 @@
 import * as React from 'react'
+const { useState } = React
 import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem'
@@ -12,14 +13,18 @@ const themeStyles = (theme: Theme) => ({
 })
 
 const ServiceSelect: React.SFC<ServiceSelectProps> = () => {
+    const [ selectedValue, setSelectValue ] = useState<string>('mixcloud')
+    const handleSelect = (e: any) => {
+        setSelectValue(e.target.value)
+    }
+
     return (
         <ContainerStyles>
             <InputLabel htmlFor="service-select-label" className="service-select-label">Service</InputLabel>
             <Select
                 className="service-select"
-                value="TEST"
-                // onChange={(e: any) => setSelectValue(e.target.value)}
-                onChange={() => null}
+                value={selectedValue}
+                onChange={handleSelect}
                 inputProps={{
                     name: 'service',
                     id: 'service-select',
@@ -27,6 +32,9 @@ const ServiceSelect: React.SFC<ServiceSelectProps> = () => {
             >
                 <MenuItem value="TEST">
                     <em>Test</em>
+                </MenuItem>
+                <MenuItem value="mixcloud">
+                    <em>Mixcloud</em>
                 </MenuItem>
             </Select>
         </ContainerStyles>

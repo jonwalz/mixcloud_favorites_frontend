@@ -1,10 +1,20 @@
-import * as React from "react"
-import styled from "@emotion/styled"
-import Feed from "./feed_list"
-import classNames from "classnames"
-import { withStyles, Theme } from "@material-ui/core/styles"
+import * as React from 'react'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+import styled from '@emotion/styled'
+import Feed from './feed_list'
+import classNames from 'classnames'
+import { withStyles, Theme } from '@material-ui/core/styles'
 
-const ContentsContainer = styled("section")`
+const GET_USERNAME = gql`
+    query($username: String!) @client {
+        dj(username: $username) {
+            display_name
+        }
+    }
+`
+
+const ContentsContainer = styled('section')`
   height: 100vh;
   width: 66%;
   margin-top: 73px;
@@ -17,26 +27,39 @@ const ContentsContainer = styled("section")`
   }
 `
 interface StyleClasses {
-    content: string,
+    content: string
     contentShift: string
 }
 
 interface ContentsProps {
-    readonly selectedDj: string,
-    readonly selectedDisplayName: string,
-    readonly isOpen: boolean,
+    readonly selectedDj: string
+    readonly selectedDisplayName: string
+    readonly isOpen: boolean
     readonly classes: StyleClasses
 }
 
-const Contents = ({ selectedDj, selectedDisplayName, isOpen, classes }: ContentsProps) => {
+const Contents = ({
+    selectedDj,
+    isOpen,
+    classes,
+}: ContentsProps) => {
     return (
         <ContentsContainer
             className={classNames(classes.content, {
                 [classes.contentShift]: isOpen,
             })}
         >
-            <h2>{selectedDisplayName}</h2>
-            {selectedDj && <Feed username={selectedDj} />}
+            <Query query={GET_USERNAME} variables={{ username: selectedDj }}>
+                {(data: any) => (
+                    <>
+                        <h2>{data.display_name}</h2>
+                        {selectedDj && <Feed username={selectedDj} />}
+                        {!selectedDj && (
+                            <span style={{ margin: '0 auto' }}>Nothingy selected</span>
+                        )}
+                    </>
+                )}
+            </Query>
         </ContentsContainer>
     )
 }
@@ -46,14 +69,14 @@ const drawerWidth = 240
 const styles = (theme: Theme) => ({
     content: {
         flexGrow: 1,
-        transition: theme.transitions.create("margin", {
+        transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
         marginLeft: -drawerWidth,
     },
     contentShift: {
-        transition: theme.transitions.create("margin", {
+        transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
         }),
